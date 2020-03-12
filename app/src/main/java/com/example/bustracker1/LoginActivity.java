@@ -49,40 +49,32 @@ public class LoginActivity extends AppCompatActivity {
                 user_name=txt1.getText().toString();
                 pass=txt2.getText().toString();
                 mauth=FirebaseAuth.getInstance();
-                if(user_name.isEmpty() || pass.isEmpty())
-                {
-                    Toast.makeText(LoginActivity.this, "Please enter all the details", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    mauth.signInWithEmailAndPassword(user_name,pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                        @Override
-                        public void onSuccess(AuthResult authResult) {
-                            sharedPreferences=getSharedPreferences("SHARED_PREFERENCES",MODE_PRIVATE);
-                            SharedPreferences.Editor edit=sharedPreferences.edit();
-                            String userId=mauth.getUid();
-                            edit.putString("UID",userId);
-                            edit.commit();
-//                            Toast.makeText(LoginActivity.this, "Shared preferences stored and they are"+sharedPreferences.getString("UID","not found"), Toast.LENGTH_SHORT).show();
-                            progressDialog.cancel();
-                            finish();
-                            startActivity(new Intent(LoginActivity.this,AfterLogin.class));
-                        }
+//                if(user_name.isEmpty() || pass.isEmpty())
+//                {
+//                    Toast.makeText(LoginActivity.this, "Please enter all the details", Toast.LENGTH_SHORT).show();
+//                }
+                mauth.signInWithEmailAndPassword(user_name,pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        sharedPreferences=getSharedPreferences("SHARED_PREFERENCES",MODE_PRIVATE);
+                        SharedPreferences.Editor edit=sharedPreferences.edit();
+                        String userId=mauth.getUid();
+                        edit.putString("UID",userId);
+                        edit.commit();
+                        progressDialog.cancel();
+                        finish();
+                        startActivity(new Intent(LoginActivity.this,NavigateAfterLogin.class));
+                    }
 
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            progressDialog.cancel();
-                            Toast.makeText(LoginActivity.this, "Login failed due to some reasons", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        progressDialog.cancel();
+                        Toast.makeText(LoginActivity.this, "Login failed due to some reasons", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
-//    private void updateisLoggedIn(){
-//        databaseReference.child("isLoggedIn").setValue("yes");
-//        Toast.makeText(this, "isLoggeinvalue is cahnged", Toast.LENGTH_SHORT).show();
-//        isLoggedIn=false;
-//    }
 
 }

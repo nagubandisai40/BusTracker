@@ -41,8 +41,13 @@ public class AfterLogin extends AppCompatActivity {
     FusedLocationProviderClient fusedLocationProviderClient;
     LocationRequest locationRequest;
     Location mlocation;
+
     private  static  final int REQ_CODE=101;
     DatabaseReference databaseReference;
+    String busName;
+    String driverNumber;
+    String uid1;
+    String driverName;
 
 
     @Override
@@ -50,6 +55,15 @@ public class AfterLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_after_login);
         sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", MODE_PRIVATE);
+        busName=sharedPreferences.getString("BUS_NAME","");
+        driverNumber=sharedPreferences.getString("DRIVER_NUMBER","");
+        driverName=sharedPreferences.getString("DRIVER_NAME","");
+
+//        if(busName.isEmpty() || driverNumber.isEmpty())
+//        {
+//            dialogLayout.show(getSupportFragmentManager(),"Dialog_Layout");
+//        }
+
         databaseReference=FirebaseDatabase.getInstance().getReference().child("buses");
         fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(this);
         createLocationRequest();
@@ -60,7 +74,7 @@ public class AfterLogin extends AppCompatActivity {
     private void getLocationUpdates(){
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // reuqest for permission
+
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
                     REQ_CODE);
             return;
@@ -71,6 +85,7 @@ public class AfterLogin extends AppCompatActivity {
                 super.onLocationResult(locationResult);
                 mlocation=locationResult.getLastLocation();
                 String uid=sharedPreferences.getString("UID","");
+                uid1=sharedPreferences.getString("UID","");
                 if(!uid.isEmpty())
                 {
                     HashMap<String,Object> map=new HashMap<>();
@@ -78,6 +93,9 @@ public class AfterLogin extends AppCompatActivity {
                     String longitude= String.valueOf(mlocation.getLongitude());
                     map.put("latitude",latitude);
                     map.put("longitude",longitude);
+                    map.put("name",busName);
+                    map.put("phoneNum",driverNumber);
+                    map.put("driverName",driverName);
                     databaseReference.child(uid).updateChildren(map);
                 }
                 Toast.makeText(AfterLogin.this, "The location fetched is "+locationResult.getLastLocation().getLatitude()+"long:"+locationResult.getLastLocation().getLongitude(), Toast.LENGTH_SHORT).show();
@@ -106,15 +124,12 @@ public class AfterLogin extends AppCompatActivity {
     {
         locationRequest=new LocationRequest();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        locationRequest.setFastestInterval(3000);
-        locationRequest.setInterval(6000);
-//        locationRequest.setSmallestDisplacement(5);
+        locationRequest.setFastestInterval(10000);
+        locationRequest.setInterval(15000);
     }
 
     @Override
     public void onBackPressed() {
-//        super.onBackPressed();
-//        finishAffinity();
         if(remainingTime+2000>System.currentTimeMillis())
         {
             System.exit(1);
@@ -134,14 +149,18 @@ public class AfterLogin extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId()==R.id.logouticon) {
+            Toast.makeText(this, "The uid to remove is "+uid1, Toast.LENGTH_SHORT).show();
+            databaseReference.child(uid1).child("latitude").removeValue();
+            databaseReference.child(uid1).child("longitude").removeValue();
+            databaseReference.child(uid1).child("name").removeValue();
+            databaseReference.child(uid1).child("phoneNum").removeValue();
+            databaseReference.child(uid1).child("driverName").removeValue();
             sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", MODE_PRIVATE);
             SharedPreferences.Editor edit = sharedPreferences.edit();
-//            String usrid=FirebaseAuth.getInstance().getUid();
-            edit.clear();
+            edit.remove("UID");
+//            edit.clear();
             edit.commit();
-//            Toast.makeText(this, "logout icon is clicked", Toast.LENGTH_SHORT).show();
             FirebaseAuth.getInstance().signOut();
-//            Toast.makeText(this, "Signout success", Toast.LENGTH_SHORT).show();
             finish();
             startActivity(new Intent(AfterLogin.this, MainActivity.class));
         }

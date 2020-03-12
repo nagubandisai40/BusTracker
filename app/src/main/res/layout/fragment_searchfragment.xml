@@ -24,9 +24,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/search_btn"
             android:text="Search"
-            android:paddingLeft="12dp"
-            >
-
+            android:paddingLeft="12dp">
         </Button>
 
     </LinearLayout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/get_nearby_buses"
+        android:icon="@drawable/ic_directions_bus_black_24dp"
+        android:title="Near By"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.SearchView">
+    </item>
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="Search"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.SearchView">
+    </item>
+
+    <item
+        android:id="@+id/contact"
+        android:icon="@drawable/ic_call_black_24dp"
+        android:title="Contact"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.SearchView">
+    </item>
+
+</menu>

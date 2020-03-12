@@ -14,19 +14,44 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="User"
-            android:gravity="center_horizontal"
             android:id="@+id/user"
+            android:text="User"
+            android:textColor="#fff"
             />
+
         <Button
+            android:textColor="#fff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Admin"
-            android:gravity="center_horizontal"
             android:id="@+id/admin"
-            android:layout_centerInParent="true"/>
+            android:text="Admin"
+            />
+<!--        <Button-->
+<!--            android:text="User"-->
+<!--            android:textColor="#FFFFFF"-->
+<!--            android:textSize="30sp"-->
+<!--            android:layout_width="270dp"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:background="@drawable/userbtnshape"-->
+<!--            android:shadowColor="#A8A8A8"-->
+<!--            android:shadowDx="0"-->
+<!--            android:shadowDy="0"-->
+<!--            android:shadowRadius="0"-->
+<!--            android:id="@+id/user"-->
+<!--            />-->
+<!--        <Button-->
+<!--            android:layout_marginTop="20sp"-->
+<!--            android:text="Admin"-->
+<!--            android:textColor="#FFFFFF"-->
+<!--            android:textSize="30sp"-->
+<!--            android:layout_width="270dp"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:background="@drawable/userbtnshape"-->
+<!--            android:shadowColor="#A8A8A8"-->
+<!--            android:shadowDx="0"-->
+<!--            android:shadowDy="0"-->
+<!--            android:shadowRadius="0"-->
+<!--            android:id="@+id/admin"-->
+<!--            />-->
     </LinearLayout>
-
-
-
 </RelativeLayout>

@@ -6,16 +6,27 @@ public class BusModel {
     private String longitude;
     private String phoneNum;
     private String name;
+    private  String driverName;
 
     public BusModel(){
 
     }
 
-    public BusModel(String latitude, String longitude, String phoneNum, String name) {
+    public BusModel(String latitude, String longitude, String phoneNum, String name,String driverName) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.phoneNum = phoneNum;
         this.name = name;
+        this.driverName=driverName;
+    }
+
+    public String getDriverName()
+    {
+        return driverName;
+    }
+
+    public void setDriverName(String driverName){
+        this.driverName=driverName;
     }
 
     public String getLatitude() {
