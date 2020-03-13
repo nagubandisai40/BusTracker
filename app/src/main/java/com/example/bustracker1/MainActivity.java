@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String uid=sharedPreferences.getString("UID","");
-                Toast.makeText(MainActivity.this, "The fetched uid is "+uid, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, "The fetched uid is "+uid, Toast.LENGTH_SHORT).show();
                 if(uid.isEmpty())
                 {
                     startActivity(new Intent(MainActivity.this,LoginActivity.class));

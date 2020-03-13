@@ -98,7 +98,7 @@ public class AfterLogin extends AppCompatActivity {
                     map.put("driverName",driverName);
                     databaseReference.child(uid).updateChildren(map);
                 }
-                Toast.makeText(AfterLogin.this, "The location fetched is "+locationResult.getLastLocation().getLatitude()+"long:"+locationResult.getLastLocation().getLongitude(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(AfterLogin.this, "The location fetched is "+locationResult.getLastLocation().getLatitude()+"long:"+locationResult.getLastLocation().getLongitude(), Toast.LENGTH_SHORT).show();
             }
         },getMainLooper());
 
@@ -149,7 +149,7 @@ public class AfterLogin extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId()==R.id.logouticon) {
-            Toast.makeText(this, "The uid to remove is "+uid1, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "The uid to remove is "+uid1, Toast.LENGTH_SHORT).show();
             databaseReference.child(uid1).child("latitude").removeValue();
             databaseReference.child(uid1).child("longitude").removeValue();
             databaseReference.child(uid1).child("name").removeValue();

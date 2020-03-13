@@ -21,7 +21,7 @@ public class NavigateAfterLogin extends AppCompatActivity {
         if(busName.isEmpty() || driverNo.isEmpty())
         {
             startActivity(new Intent(NavigateAfterLogin.this,NamePhoneLayout.class));
-            Toast.makeText(this, "The details like name and driver no entered must be navigated", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "The details like name and driver no entered must be navigated", Toast.LENGTH_SHORT).show();
         }else{
             finish();
             startActivity(new Intent(NavigateAfterLogin.this,AfterLogin.class));

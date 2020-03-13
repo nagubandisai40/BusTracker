@@ -56,7 +56,7 @@ public class MyAdapter extends ArrayAdapter<BusModel> {
         call_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Call button is clicked" + getItem(position).getPhoneNum(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Call button is clicked" + getItem(position).getPhoneNum(), Toast.LENGTH_SHORT).show();
                 Intent callIntent = new Intent(Intent.ACTION_DIAL);
                 callIntent.setData(Uri.parse("tel:" + getItem(position).getPhoneNum()));
 //                if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {

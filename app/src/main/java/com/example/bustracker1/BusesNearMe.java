@@ -46,6 +46,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -104,6 +105,7 @@ public class BusesNearMe extends Fragment implements OnMapReadyCallback{
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        //Loading progress
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setCancelable(false);
         progressDialog.setTitle("Loading");
@@ -111,6 +113,7 @@ public class BusesNearMe extends Fragment implements OnMapReadyCallback{
         databaseReference = FirebaseDatabase.getInstance().getReference().child("buses");
         busList = new ArrayList<>();
         progressDialog.show();
+
         fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(getActivity());
         arrayList=new ArrayList<>();
         finalList=new ArrayList<>();
@@ -139,7 +142,7 @@ public class BusesNearMe extends Fragment implements OnMapReadyCallback{
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getActivity(), "onCancelled Method called", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Database error occured", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -192,6 +195,8 @@ public class BusesNearMe extends Fragment implements OnMapReadyCallback{
 
 
     private void getLocationUpdates(){
+        //permission check
+
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 

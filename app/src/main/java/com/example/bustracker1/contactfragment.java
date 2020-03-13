@@ -69,7 +69,7 @@ public class contactfragment extends Fragment {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Toast.makeText(getActivity(), "onDataChange MEthod called", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "onDataChange MEthod called", Toast.LENGTH_SHORT).show();
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     BusModel bus = new BusModel();
                     bus.setName(data.child("name").getValue().toString());
@@ -85,7 +85,7 @@ public class contactfragment extends Fragment {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getActivity(), "onCancelled Method Called", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "onCancelled Method Called", Toast.LENGTH_SHORT).show();
                 progressDialog.cancel();
             }
         });
